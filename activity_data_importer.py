@@ -5,30 +5,12 @@ def import_activity_data():
     df = pd.read_csv('data/activities.csv')
 
     # drop any columns that are not needed for training the model
-    df = (df
-        .drop('Description', axis='columns')
-        .drop('Activity Parent', axis='columns')
-        .drop('Privacy', axis='columns')
-        .drop('Gear', axis='columns')
-        .drop('Time Zone', axis='columns')
-        .drop('Offset', axis='columns')
-        .drop('Activity ID', axis='columns')
-        .drop('Activity Name', axis='columns')
-        .drop('Location Name', axis='columns')
-        .drop('File Format', axis='columns')
-        .drop('Average Moving Speed (km/h or min/km)', axis='columns')
-        .drop('Max. Speed (km/h or min/km)', axis='columns')
-        .drop('Elapsed Duration (h:m:s)', axis='columns')
-        .drop('Moving Duration (h:m:s)', axis='columns')
-        .drop('Average Speed (km/h or min/km)', axis='columns')
-        .drop('Device', axis='columns')
-        .drop('Begin Latitude (°DD)', axis='columns')
-        .drop('End Latitude (°DD)', axis='columns')
-        .drop('Begin Longitude (°DD)', axis='columns')
-        .drop('End Longitude (°DD)', axis='columns')
-        .drop('Strokes', axis='columns')
-        .drop('Elevation Corrected', axis='columns')
-    )
+    columns_to_drop = ['Description', 'Activity Parent', 'Privacy', 'Gear', 'Time Zone', 'Offset', 'Activity ID',
+                       'Activity Name', 'Location Name', 'File Format', 'Average Moving Speed (km/h or min/km)',
+                       'Max. Speed (km/h or min/km)', 'Elapsed Duration (h:m:s)', 'Moving Duration (h:m:s)',
+                       'Average Speed (km/h or min/km)', 'Device', 'Begin Latitude (°DD)', 'End Latitude (°DD)',
+                       'Begin Longitude (°DD)', 'End Longitude (°DD)', 'Strokes', 'Elevation Corrected']
+    df = df.drop(columns_to_drop, axis='columns')
     
     # convert columns to convenient data type for further processing
     df['Start Time'] = pd.to_datetime(df['Start Time'], utc=True)
